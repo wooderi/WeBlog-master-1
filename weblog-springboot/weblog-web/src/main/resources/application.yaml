@@ -24,7 +24,7 @@ spring:
       charset: UTF-8
       force: true
       enabled: true
-      
+
 jwt:
   # 签发人
   issuer: quanxiaoha
@@ -37,7 +37,7 @@ jwt:
   # token Header 中的 value 值前缀
   tokenPrefix: Bearer
 
-  
+
 #=================================================================
 # minio (上传图片需要，需配置成自己的地址)
 #=================================================================
@@ -46,8 +46,8 @@ minio:
   endpoint: http://127.0.0.1:9005
   # 公共访问端点（用于前端显示图片）
   publicEndpoint: http://127.0.0.1:9000
-  accessKey: AJun
-  secretKey: BIGnull1803
+  accessKey: admin
+  secretKey: password123
   bucketName: weblog
   # 是否替换localhost/127.0.0.1为实际可访问的IP（解决开发环境跨域问题）
   replaceLocalhost: false

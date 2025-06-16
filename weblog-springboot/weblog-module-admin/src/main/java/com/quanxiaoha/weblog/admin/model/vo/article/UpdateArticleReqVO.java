@@ -12,6 +12,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * 更新文章请求参数VO
+ * 包含文章ID、标题、内容、头图、摘要、分类ID和标签列表等更新信息
+ */
 @Data
 @Builder
 @AllArgsConstructor

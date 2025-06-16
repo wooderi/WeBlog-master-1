@@ -20,14 +20,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 文章管理服务实现类
+ * 负责文章的发布、查询、更新、删除等操作
+ */
 public class AdminArticleServiceImpl implements AdminArticleService {
 
     @Autowired
@@ -77,6 +76,11 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         return url;
     }
 
+    /**
+     * 发布文章
+     * @param publishArticleReqVO 文章发布请求参数，包含标题、内容、分类ID、标签等信息
+     * @return 发布结果，成功返回success，失败返回fail
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Response publishArticle(PublishArticleReqVO publishArticleReqVO) {
@@ -120,6 +124,11 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         return isExecuteSuccess ? Response.success() : Response.fail();
     }
 
+    /**
+     * 查询文章详情
+     * @param queryArticleDetailReqVO 文章详情查询请求参数，包含文章ID
+     * @return 文章详情，包含标题、内容、分类ID、标签ID等信息
+     */
     @Override
     public Response queryArticleDetail(QueryArticleDetailReqVO queryArticleDetailReqVO) {
         Long articleId = queryArticleDetailReqVO.getArticleId();
@@ -152,6 +161,11 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         return Response.success(queryArticleDetailRspVO);
     }
 
+    /**
+     * 分页查询文章列表
+     * @param queryArticlePageListReqVO 文章分页查询请求参数，包含当前页、每页大小、开始日期、结束日期、搜索标题等信息
+     * @return 分页文章列表数据
+     */
     @Override
     public Response queryArticlePageList(QueryArticlePageListReqVO queryArticlePageListReqVO) {
         Long current = queryArticlePageListReqVO.getCurrent();
@@ -175,6 +189,11 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         return Response.success(articleDOPage);
     }
 
+    /**
+     * 删除文章
+     * @param deleteArticleReqVO 文章删除请求参数，包含文章ID
+     * @return 删除结果，成功返回success
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Response deleteArticle(DeleteArticleReqVO deleteArticleReqVO) {
@@ -184,6 +203,11 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         return Response.success();
     }
 
+    /**
+     * 更新文章
+     * @param updateArticleReqVO 文章更新请求参数，包含文章ID、标题、内容、分类ID、标签等信息
+     * @return 更新结果，成功返回success，失败返回fail
+     */
     @Override
     // @Transactional(rollbackFor = Exception.class)
     public Response updateArticle(UpdateArticleReqVO updateArticleReqVO) {
@@ -232,10 +256,10 @@ public class AdminArticleServiceImpl implements AdminArticleService {
     }
 
     /**
-     * 处理标签相关业务
-     * 
-     * @param articleId
-     * @param publishTags
+     * 处理文章标签相关业务
+     * 包括新增不存在的标签、关联文章与标签
+     * @param articleId 文章ID
+     * @param publishTags 文章标签列表
      */
     public void handleTagBiz(Long articleId, List<String> publishTags) {
         List<TagDO> tagDOS = tagDao.selectAll();

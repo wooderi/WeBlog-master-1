@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
- * @author yjf
- * @description 访客记录表
+ * 访客记录数据对象
+ * 映射数据库表：t_visitor_record
  */
 @Data
 @Builder
@@ -21,12 +21,35 @@ import java.util.Date;
 @NoArgsConstructor
 public class VisitorRecordDO {
 
+    /**
+     * 主键ID
+     */
     @TableId(type = IdType.AUTO)
     private Long id;
+    
+    /**
+     * 访客标识
+     */
     private String visitor;
+    
+    /**
+     * IP地址
+     */
     private String ipAddress;
+    
+    /**
+     * IP归属地
+     */
     private String ipRegion;
+    
+    /**
+     * 访问时间
+     */
     private Date visitTime;
+    
+    /**
+     * 是否通知（0-未通知，1-已通知）
+     */
     private Integer isNotify;
 }
 

@@ -21,14 +21,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 用户详情服务实现类
+ * 负责加载用户认证信息及角色权限
+ */
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -36,6 +35,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private AdminUserRoleDao userRoleDao;
 
+    /**
+     * 根据用户名加载用户认证信息及角色权限
+     * @param username 用户名
+     * @return 用户认证信息，包含用户名、密码和权限列表
+     * @throws UsernameNotFoundException 当用户不存在时抛出
+     */
     @Override
     public UserDetails loadUserByUsername(String username) {
         UserDO userDO = userDao.selectByUsername(username);

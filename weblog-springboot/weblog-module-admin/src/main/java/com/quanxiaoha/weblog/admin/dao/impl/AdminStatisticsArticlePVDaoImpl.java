@@ -15,11 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+ * 文章PV统计数据访问实现类
+ * 处理文章访问量(PV)的统计和查询等数据库操作
+ */
 @Service
 @Slf4j
 public class AdminStatisticsArticlePVDaoImpl implements AdminStatisticsArticlePVDao {
@@ -27,6 +25,11 @@ public class AdminStatisticsArticlePVDaoImpl implements AdminStatisticsArticlePV
     @Autowired
     private StatisticsArticlePVMapper statisticsArticlePVMapper;
 
+    /**
+     * 增加指定日期的PV统计
+     * 如果当天记录不存在则创建，存在则更新计数+1
+     * @param currDate 当前日期
+     */
     @Override
     public void pvIncrease(Date currDate) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,6 +53,11 @@ public class AdminStatisticsArticlePVDaoImpl implements AdminStatisticsArticlePV
         }
     }
 
+    /**
+     * 查询最近一周的PV统计记录
+     * 按日期倒序排列，最多返回7条记录
+     * @return 最近7天的PV统计数据对象列表
+     */
     @Override
     public List<StatisticsArticlePVDO> selectLatestWeekRecords() {
         Date date = new Date();
@@ -63,6 +71,10 @@ public class AdminStatisticsArticlePVDaoImpl implements AdminStatisticsArticlePV
         return statisticsArticlePVMapper.selectList(wrapper);
     }
 
+    /**
+     * 查询所有PV统计数据
+     * @return 所有日期的PV统计数据对象列表
+     */
     @Override
     public List<StatisticsArticlePVDO> selectAllPVCount() {
         return statisticsArticlePVMapper.selectList(null);

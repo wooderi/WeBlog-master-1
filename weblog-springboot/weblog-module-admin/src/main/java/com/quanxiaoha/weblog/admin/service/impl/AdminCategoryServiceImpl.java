@@ -27,19 +27,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 分类管理服务实现类
+ * 负责分类的添加、查询、删除等操作
+ */
 public class AdminCategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryDO> implements AdminCategoryService {
 
     @Autowired
     private AdminCategoryDao categoryDao;
 
+    /**
+     * 添加分类
+     * @param addCategoryReqVO 分类添加请求参数，包含分类名称
+     * @return 添加结果，成功返回success，分类已存在返回DUPLICATE_CATEGORY_ERROR错误
+     */
     @Override
     public Response addCategory(AddCategoryReqVO addCategoryReqVO) {
         String categoryName = addCategoryReqVO.getName();
@@ -58,6 +62,11 @@ public class AdminCategoryServiceImpl extends ServiceImpl<CategoryMapper, Catego
 
     }
 
+    /**
+     * 分页查询分类列表
+     * @param queryCategoryPageListReqVO 分类分页查询请求参数，包含当前页、每页大小、分类名称、开始日期、结束日期等信息
+     * @return 分页分类列表数据
+     */
     @Override
     public PageResponse queryCategoryPageList(QueryCategoryPageListReqVO queryCategoryPageListReqVO) {
         Long current = queryCategoryPageListReqVO.getCurrent();
@@ -94,6 +103,11 @@ public class AdminCategoryServiceImpl extends ServiceImpl<CategoryMapper, Catego
         return PageResponse.success(categoryDOPage, queryCategoryPageListRspVOS);
     }
 
+    /**
+     * 删除分类
+     * @param deleteCategoryReqVO 分类删除请求参数，包含分类ID
+     * @return 删除结果，成功返回success
+     */
     @Override
     public Response deleteCategory(DeleteCategoryReqVO deleteCategoryReqVO) {
         Long categoryId = deleteCategoryReqVO.getCategoryId();
@@ -101,6 +115,10 @@ public class AdminCategoryServiceImpl extends ServiceImpl<CategoryMapper, Catego
         return Response.success();
     }
 
+    /**
+     * 查询分类下拉列表
+     * @return 分类下拉列表数据，包含分类ID和名称
+     */
     @Override
     public Response queryCategorySelectList() {
         List<CategoryDO> categoryDOList = categoryDao.selectAllCategory();

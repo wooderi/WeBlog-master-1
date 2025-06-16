@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 查询文章详情响应VO
+ * 包含文章ID、标题、头图、内容、摘要、分类ID和标签ID列表等信息
+ */
 @Data
 @Builder
 @AllArgsConstructor

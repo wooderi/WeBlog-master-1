@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-07-02 9:31
- * @description: TODO
- **/
+ * 文章PV增长异步任务
+ * 负责处理文章阅读量和PV统计的异步增长
+ */
 @Service
 @Slf4j
 public class PVIncreaseAsyncTask {
@@ -24,6 +22,13 @@ public class PVIncreaseAsyncTask {
     @Autowired
     private AdminStatisticsArticlePVDao statisticsArticlePVDao;
 
+    /**
+     * 处理文章PV增长
+     * @param articleId 文章ID
+     * 异步执行以下操作：
+     * 1. 增加指定文章的阅读量
+     * 2. 增加当天的PV统计
+     */
     @Async
     public void handle(Long articleId) {
         log.info("## 文章被阅读量异步 +1, articleId: {}", articleId);

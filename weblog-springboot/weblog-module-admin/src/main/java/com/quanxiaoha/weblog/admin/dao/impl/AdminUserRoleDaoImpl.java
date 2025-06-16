@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+ * 用户角色关联数据访问实现类
+ * 实现用户与角色之间关联关系的数据库操作
+ */
 @Service
 @Slf4j
 public class AdminUserRoleDaoImpl implements AdminUserRoleDao {
@@ -23,6 +22,11 @@ public class AdminUserRoleDaoImpl implements AdminUserRoleDao {
     @Autowired
     private UserRoleMapper userRoleMapper;
 
+    /**
+     * 根据用户名查询角色关联列表
+     * @param username 用户名
+     * @return 用户角色关联数据对象列表
+     */
     @Override
     public List<UserRoleDO> selectByUsername(String username) {
         QueryWrapper<UserRoleDO> wrapper = new QueryWrapper<>();

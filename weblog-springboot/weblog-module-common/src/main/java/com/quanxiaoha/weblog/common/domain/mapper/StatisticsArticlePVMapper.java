@@ -9,6 +9,10 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * 文章访问量统计数据访问层
+ * 提供文章PV统计信息的CRUD操作
+ */
 public interface StatisticsArticlePVMapper extends BaseMapper<StatisticsArticlePVDO> {
 
 }

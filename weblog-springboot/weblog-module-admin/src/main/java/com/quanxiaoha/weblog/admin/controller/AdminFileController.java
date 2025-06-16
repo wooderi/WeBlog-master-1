@@ -11,20 +11,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-19 16:06
- * @description: TODO
- **/
+ * 文件管理控制器
+ * 处理后台文件上传相关操作
+ */
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/file")
 @Slf4j
 public class AdminFileController {
 
     @Autowired
     private AdminFileService fileService;
 
+    /**
+     * 文件上传接口
+     * @param file 要上传的文件
+     * @return 上传结果，包含文件访问URL等信息
+     */
     @PostMapping("/file/upload")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Response uploadFile(@RequestParam MultipartFile file) {

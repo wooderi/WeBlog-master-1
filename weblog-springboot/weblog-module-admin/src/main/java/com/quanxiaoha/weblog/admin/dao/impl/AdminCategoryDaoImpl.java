@@ -10,23 +10,30 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+ * 分类数据访问实现类
+ * 实现分类信息的查询和统计等数据库操作
+ */
 @Service
 @Slf4j
 public class AdminCategoryDaoImpl implements AdminCategoryDao {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    /**
+     * 查询所有分类
+     * @return 分类数据对象列表
+     */
     @Override
     public List<CategoryDO> selectAllCategory() {
         return categoryMapper.selectList(null);
     }
 
+    /**
+     * 查询分类总数（未删除状态）
+     * @return 分类总数
+     */
     @Override
     public Long selectTotalCount() {
         QueryWrapper<CategoryDO> wrapper = new QueryWrapper<>();

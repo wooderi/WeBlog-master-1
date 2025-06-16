@@ -11,6 +11,15 @@ import com.quanxiaoha.weblog.common.domain.dos.TagDO;
 import com.quanxiaoha.weblog.common.domain.dos.UserDO;
 
 
+/**
+ * 管理员用户管理服务接口
+ * 负责管理员密码更新等用户相关操作
+ */
 public interface AdminUserService extends IService<UserDO> {
+    /**
+     * 更新管理员密码
+     * @param updateAdminPasswordReqVO 密码更新请求参数
+     * @return 操作结果
+     */
     Response updateAdminPassword(UpdateAdminPasswordReqVO updateAdminPasswordReqVO);
 }

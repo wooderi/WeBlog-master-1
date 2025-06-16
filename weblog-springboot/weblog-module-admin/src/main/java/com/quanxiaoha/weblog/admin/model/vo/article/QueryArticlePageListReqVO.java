@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * 文章分页查询请求参数VO
+ * 包含页码、每页大小、日期范围和标题搜索关键词等筛选条件
+ */
 @Data
 @Builder
 @AllArgsConstructor

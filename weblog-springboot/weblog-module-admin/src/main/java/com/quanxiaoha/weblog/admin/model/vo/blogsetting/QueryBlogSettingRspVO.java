@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-19 16:06
- * @description: TODO
- **/
+ * 查询博客设置响应VO
+ * 包含博客ID、博客名称、作者、头像、介绍、GitHub主页、CSDN主页、Gitee主页和知乎主页等信息
+ */ 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

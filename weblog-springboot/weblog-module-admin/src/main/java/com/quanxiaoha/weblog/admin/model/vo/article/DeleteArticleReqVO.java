@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * 删除文章请求参数VO
+ */
 @Data
 @Builder
 @AllArgsConstructor

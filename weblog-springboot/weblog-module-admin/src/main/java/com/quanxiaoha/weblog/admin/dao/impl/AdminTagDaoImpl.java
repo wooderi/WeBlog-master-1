@@ -14,18 +14,26 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+ * 标签数据访问实现类
+ * 实现标签的分页查询、搜索、新增和统计等数据库操作
+ */
 @Service
 @Slf4j
 public class AdminTagDaoImpl implements AdminTagDao {
     @Autowired
     private TagMapper tagMapper;
 
+    /**
+     * 分页查询标签列表，支持时间范围和名称筛选
+     * @param current 当前页码
+     * @param size 每页大小
+     * @param startDate 开始日期
+     * @param endDate 结束日期
+     * @param tagName 标签名称关键词
+     * @return 分页标签数据对象
+     */
     @Override
     public Page<TagDO> queryTagPageList(Long current, Long size, Date startDate, Date endDate, String tagName) {
         Page<TagDO> page = new Page<>(current, size);
@@ -38,6 +46,11 @@ public class AdminTagDaoImpl implements AdminTagDao {
         return tagMapper.selectPage(page, wrapper);
     }
 
+    /**
+     * 按关键词搜索标签，忽略大小写
+     * @param key 搜索关键词
+     * @return 匹配的标签数据对象列表
+     */
     @Override
     public List<TagDO> searchTags(String key) {
         // select * from t_tag where name like UPPER(CONCAT('%', 'J', '%'))
@@ -49,16 +62,29 @@ public class AdminTagDaoImpl implements AdminTagDao {
         return tagMapper.selectList(wrapper);
     }
 
+    /**
+     * 查询所有标签
+     * @return 标签数据对象列表
+     */
     @Override
     public List<TagDO> selectAll() {
         return tagMapper.selectList(null);
     }
 
+    /**
+     * 新增标签
+     * @param tagDO 标签数据对象
+     * @return 影响行数
+     */
     @Override
     public int insert(TagDO tagDO) {
         return tagMapper.insert(tagDO);
     }
 
+    /**
+     * 查询标签总数（未删除状态）
+     * @return 标签总数
+     */
     @Override
     public Long selectTotalCount() {
         QueryWrapper<TagDO> wrapper = new QueryWrapper<>();

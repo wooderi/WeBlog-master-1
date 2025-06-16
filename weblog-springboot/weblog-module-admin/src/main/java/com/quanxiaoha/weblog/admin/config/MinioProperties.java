@@ -8,12 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-05-11 8:49
- * @description: TODO
- **/
+
 @ConfigurationProperties(prefix = "minio")
 @Component
 @Data

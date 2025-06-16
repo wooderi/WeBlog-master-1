@@ -2,6 +2,7 @@ package com.quanxiaoha.weblog.admin.config;
 
 import io.minio.MinioClient;
 import lombok.Getter;
+
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
@@ -14,11 +15,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
+
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-05-11 8:49
- * @description: TODO
+ * @description: Admin模块Minio配置类，负责Minio客户端的初始化和配置校验
  **/
 @Configuration
 @Slf4j
@@ -26,6 +25,9 @@ public class MinioConfig {
     @Autowired
     private MinioProperties minioProperties;
 
+    /**
+     * 初始化方法，用于校验Minio配置参数
+     */
     @PostConstruct
     public void init() {
         log.info("=================================================================");
@@ -36,6 +38,10 @@ public class MinioConfig {
         log.info("=================================================================");
     }
 
+    /**
+     * 配置OkHttp客户端，设置连接池和超时时间
+     * @return OkHttpClient实例
+     */
     @Bean
     public OkHttpClient okHttpClient() {
         return new OkHttpClient.Builder()
@@ -47,6 +53,11 @@ public class MinioConfig {
                 .build();
     }
 
+    /**
+     * 创建Minio客户端实例
+     * @param okHttpClient OkHttp客户端
+     * @return MinioClient实例
+     */
     @Bean
     public MinioClient minioClient(OkHttpClient okHttpClient) {
         log.info("==> 初始化Admin模块MinioClient，使用端点: {}", minioProperties.getEndpoint());

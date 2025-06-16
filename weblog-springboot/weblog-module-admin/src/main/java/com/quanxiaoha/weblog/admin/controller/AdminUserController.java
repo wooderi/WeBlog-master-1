@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-19 16:06
- * @description: TODO
- **/
+
 @RestController
+/**
+ * 用户管理控制器
+ * 处理管理员密码修改和个人信息查询等操作
+ */
 @RequestMapping("/admin")
 public class AdminUserController {
 
@@ -29,6 +28,11 @@ public class AdminUserController {
     @Autowired
     private AdminUserService userService;
 
+    /**
+     * 修改管理员密码
+     * @param updateAdminPasswordReqVO 密码更新请求参数，包含原密码和新密码
+     * @return 密码更新结果，成功返回成功信息，失败返回错误信息
+     */
     @PostMapping("/password/update")
     @ApiOperationLog(description = "修改用户密码")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -36,6 +40,10 @@ public class AdminUserController {
         return userService.updateAdminPassword(updateAdminPasswordReqVO);
     }
 
+    /**
+     * 获取管理员详细信息
+     * @return 包含管理员昵称和头像等信息的响应对象
+     */
     @PostMapping("/detail")
     @ApiOperationLog(description = "获取登录用户信息")
     public Response<QueryUserDetailRspVO> queryAdminDetail() {

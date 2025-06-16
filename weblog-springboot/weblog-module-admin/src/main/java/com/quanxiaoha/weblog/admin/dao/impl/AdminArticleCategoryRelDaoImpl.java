@@ -8,23 +8,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+ * 文章分类关联数据访问实现类
+ * 实现文章与分类之间关联关系的数据库操作
+ */
 @Service
 @Slf4j
 public class AdminArticleCategoryRelDaoImpl implements AdminArticleCategoryRelDao {
     @Autowired
     private ArticleCategoryRelMapper articleCategoryRelMapper;
 
+    /**
+     * 新增文章分类关联关系
+     * @param articleCategoryRelDO 文章分类关联数据对象
+     * @return 影响行数
+     */
     @Override
     public int insert(ArticleCategoryRelDO articleCategoryRelDO) {
         return articleCategoryRelMapper.insert(articleCategoryRelDO);
     }
 
+    /**
+     * 根据文章ID查询分类关联
+     * @param articleId 文章ID
+     * @return 文章分类关联数据对象
+     */
     @Override
     public ArticleCategoryRelDO selectByArticleId(Long articleId) {
         QueryWrapper<ArticleCategoryRelDO> wrapper = new QueryWrapper<>();
@@ -32,6 +41,11 @@ public class AdminArticleCategoryRelDaoImpl implements AdminArticleCategoryRelDa
         return articleCategoryRelMapper.selectOne(wrapper);
     }
 
+    /**
+     * 根据文章ID删除分类关联
+     * @param articleId 文章ID
+     * @return 影响行数
+     */
     @Override
     public int deleteByArticleId(Long articleId) {
         QueryWrapper<ArticleCategoryRelDO> wrapper = new QueryWrapper<>();

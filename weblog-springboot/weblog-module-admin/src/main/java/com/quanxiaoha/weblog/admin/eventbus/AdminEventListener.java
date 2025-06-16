@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-07-01 21:35
  * @description: 事件监听
  **/
+/**
+ * 管理后台事件监听器
+ * 处理文章相关事件，如阅读量(PV)统计更新
+ */
 @Component
 @Slf4j
 public class AdminEventListener implements EventListener {
@@ -21,6 +22,11 @@ public class AdminEventListener implements EventListener {
     @Autowired
     private PVIncreaseAsyncTask pvIncreaseAsyncTask;
 
+    /**
+     * 处理文章事件
+     * 当文章被访问时，异步更新文章阅读量统计
+     * @param event 文章事件对象，包含文章ID和事件消息
+     */
     @Subscribe
     @Override
     public void handleEvent(ArticleEvent event) {

@@ -28,14 +28,17 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 仪表盘统计服务实现类
+ * 负责文章统计、访问量统计等仪表盘数据查询操作
+ */
+/**
+ * 仪表盘统计服务实现类
+ * 负责查询博客仪表盘所需的各类统计数据，包括文章统计、发布统计和访问量统计等
+ */
 public class AdminDashboardServiceImpl implements AdminDashboardService {
 
     @Autowired
@@ -47,6 +50,10 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     @Autowired
     private AdminStatisticsArticlePVDao statisticsArticlePVDao;
 
+    /**
+     * 查询仪表盘文章统计信息
+     * @return 包含文章总数、分类总数、标签总数和总浏览量的统计响应
+     */
     @Override
     public Response queryDashboardArticleStatisticsInfo() {
         Long articleTotalCount = articleDao.selectTotalCount();
@@ -67,6 +74,10 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         return Response.success(queryDashboardArticleStatisticsRspVO);
     }
 
+    /**
+     * 查询仪表盘文章发布统计信息
+     * @return 包含本年度至今日的每日文章发布数量的统计响应
+     */
     @Override
     public Response queryDashboardPublishArticleStatisticsInfo() {
         // 年初
@@ -96,6 +107,10 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         return Response.success(map);
     }
 
+    /**
+     * 查询仪表盘访问量统计信息
+     * @return 包含最近一周每日访问量数据的统计响应
+     */
     @Override
     public Response queryDashboardPVStatisticsInfo() {
         List<StatisticsArticlePVDO> statisticsArticlePVDOS = statisticsArticlePVDao.selectLatestWeekRecords();

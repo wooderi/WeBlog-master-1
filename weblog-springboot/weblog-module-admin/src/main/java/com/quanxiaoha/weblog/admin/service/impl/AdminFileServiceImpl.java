@@ -12,14 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 文件管理服务实现类
+ * 负责文件上传及MinIO URL转换操作
+ */
 public class AdminFileServiceImpl implements AdminFileService {
 
     @Autowired
@@ -35,6 +34,11 @@ public class AdminFileServiceImpl implements AdminFileService {
     private static final String UPLOAD_ERROR_CODE = "10007";
     private static final String UPLOAD_ERROR_MESSAGE = "文件上传失败";
 
+    /**
+     * 上传文件到MinIO存储并返回转换后的公共访问URL
+     * @param file 待上传的文件对象
+     * @return 包含转换后文件访问URL的响应对象
+     */
     @Override
     public Response uploadFile(MultipartFile file) {
         try {

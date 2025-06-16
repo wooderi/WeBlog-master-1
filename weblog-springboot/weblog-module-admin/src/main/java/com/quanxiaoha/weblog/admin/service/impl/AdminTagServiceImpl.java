@@ -23,19 +23,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 标签管理服务实现类
+ * 负责标签的添加、查询、删除等操作
+ */
 public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implements AdminTagService {
 
     @Autowired
     private AdminTagDao tagDao;
 
+    /**
+     * 批量添加标签
+     * @param addTagReqVO 标签添加请求参数，包含标签名称列表
+     * @return 操作结果，成功返回success；若存在重复标签名则返回错误信息
+     */
     @Override
     public Response addTags(AddTagReqVO addTagReqVO) {
         List<TagDO> tags = addTagReqVO.getTags().stream()
@@ -52,6 +56,11 @@ public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implement
         return Response.success();
     }
 
+    /**
+     * 分页查询标签列表
+     * @param queryTagPageListReqVO 分页查询请求参数，包含页码、每页大小、日期范围和标签名称筛选条件
+     * @return 包含标签分页数据的响应对象
+     */
     @Override
     public Response queryTagPageList(QueryTagPageListReqVO queryTagPageListReqVO) {
         Long current = queryTagPageListReqVO.getCurrent();
@@ -65,12 +74,22 @@ public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implement
         return Response.success(tagDOPage);
     }
 
+    /**
+     * 删除标签
+     * @param deleteTagReqVO 标签删除请求参数，包含标签ID
+     * @return 操作结果，成功返回success
+     */
     @Override
     public Response deleteTag(DeleteTagReqVO deleteTagReqVO) {
         removeById(deleteTagReqVO.getTagId());
         return Response.success();
     }
 
+    /**
+     * 搜索标签
+     * @param searchTagReqVO 标签搜索请求参数，包含搜索关键词
+     * @return 包含匹配标签的下拉选择列表响应
+     */
     @Override
     public Response searchTags(SearchTagReqVO searchTagReqVO) {
         String key = searchTagReqVO.getKey();
@@ -85,6 +104,10 @@ public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implement
         return Response.success(selectListRspVOS);
     }
 
+    /**
+     * 查询所有标签的下拉选择列表
+     * @return 包含所有标签的标签-值对列表响应
+     */
     @Override
     public Response queryTagSelectList() {
         List<TagDO> tagDOS = tagDao.selectAll();

@@ -14,14 +14,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 管理员用户管理服务实现类
+ * 负责管理员密码更新等用户管理操作
+ */
 public class AdminUserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements AdminUserService {
 
     @Autowired
@@ -29,6 +28,11 @@ public class AdminUserServiceImpl extends ServiceImpl<UserMapper, UserDO> implem
     @Autowired
     private AdminUserDao userDao;
 
+    /**
+     * 更新管理员密码
+     * @param updateAdminPasswordReqVO 密码更新请求参数，包含新密码
+     * @return 操作结果，成功返回success
+     */
     @Override
     public Response updateAdminPassword(UpdateAdminPasswordReqVO updateAdminPasswordReqVO) {
         UserDO userDO = UserDO.builder()

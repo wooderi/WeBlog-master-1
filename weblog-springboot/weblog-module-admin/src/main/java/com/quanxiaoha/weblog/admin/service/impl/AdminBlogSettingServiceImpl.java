@@ -15,15 +15,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-04-17 12:08
- * @description: TODO
- **/
+
 @Service
 @Slf4j
+/**
+ * 博客设置管理服务实现类
+ * 负责博客基本信息的更新、查询等配置操作
+ */
+/**
+ * 博客设置服务实现类
+ * 负责博客基本信息的配置管理，包括更新设置和查询设置详情等操作
+ */
 public class AdminBlogSettingServiceImpl extends ServiceImpl<BlogSettingMapper, BlogSettingDO> implements AdminBlogSettingService {
+    /**
+     * 更新博客设置信息
+     * @param updateBlogSettingReqVO 博客设置更新请求参数，包含博客名称、作者、头像等信息
+     * @return 操作结果，成功返回success
+     */
     @Override
     public Response updateBlogSetting(UpdateBlogSettingReqVO updateBlogSettingReqVO) {
         BlogSettingDO blogSettingDO = BlogSettingDO.builder()
@@ -41,6 +49,10 @@ public class AdminBlogSettingServiceImpl extends ServiceImpl<BlogSettingMapper, 
         return Response.success();
     }
 
+    /**
+     * 查询博客设置详情
+     * @return 博客设置详情响应，包含博客名称、作者、头像、个人介绍及各平台主页链接等信息
+     */
     @Override
     public Response queryBlogSettingDetail() {
         BlogSettingDO blogSettingDO = getOne(null);
@@ -62,6 +74,10 @@ public class AdminBlogSettingServiceImpl extends ServiceImpl<BlogSettingMapper, 
         return Response.success(queryBlogSettingRspVO);
     }
 
+    /**
+     * 查询当前用户的昵称和头像
+     * @return 用户详情响应，包含用户名和头像信息
+     */
     @Override
     public Response<QueryUserDetailRspVO> queryNicknameAndAvatar() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
