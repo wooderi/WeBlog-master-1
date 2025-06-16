@@ -1,0 +1,49 @@
+/* @import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 1px transparent inset!important;
+}
+
+/* Element Plus 蓝色主题变量覆盖 */
+:root {
+  --el-color-primary: #1867c0;
+  --el-color-primary-light-1: #347fd0;
+  --el-color-primary-light-2: #5097e0;
+  --el-color-primary-light-3: #6ca9e9;
+  --el-color-primary-light-4: #8bbdf2;
+  --el-color-primary-light-5: #a9d0f5;
+  --el-color-primary-light-6: #c7e3f9;
+  --el-color-primary-light-7: #e5f1fc;
+  --el-color-primary-light-8: #f0f6fd;
+  --el-color-primary-light-9: #f8fbff;
+  --el-color-primary-dark-1: #155bad;
+}

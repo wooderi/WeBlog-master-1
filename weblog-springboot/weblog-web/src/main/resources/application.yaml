@@ -1,0 +1,61 @@
+server:
+  # 端口号
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+  jackson:
+    # 设置后台返参，若字段值为 null, 是否返回
+#    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      # 限制上传文件大小
+      max-file-size: 10MB
+      # 启用multipart上传功能
+      enabled: true
+      # 临时文件存储位置
+      location: ${java.io.tmpdir}
+      # 上传请求最大大小
+      max-request-size: 20MB
+    # 添加HTTP编码配置
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+      
+jwt:
+  # 签发人
+  issuer: quanxiaoha
+  # 秘钥
+  secret: gR6cytlUlgMfVh08nLFZf8hMk4mdJDX5rWBVlsCbKvRlWcLwNRU6+rIPcLx21x191kJgP8udtoZuHt5yUDWtgg==
+  # token 过期时间（单位：分钟） 24*60
+  tokenExpireTime: 1440
+  # token Header 中的 key 值
+  tokenHeaderKey: Authorization
+  # token Header 中的 value 值前缀
+  tokenPrefix: Bearer
+
+  
+#=================================================================
+# minio (上传图片需要，需配置成自己的地址)
+#=================================================================
+minio:
+  # API通信端点（用于后端上传文件） - 使用9005端口
+  endpoint: http://127.0.0.1:9005
+  # 公共访问端点（用于前端显示图片）
+  publicEndpoint: http://127.0.0.1:9000
+  accessKey: AJun
+  secretKey: BIGnull1803
+  bucketName: weblog
+  # 是否替换localhost/127.0.0.1为实际可访问的IP（解决开发环境跨域问题）
+  replaceLocalhost: false
+  # 替换localhost/127.0.0.1的目标IP，例如开发机器在局域网中的实际IP
+  localhostReplacement: 192.168.1.100
+
+#=================================================================
+# IP归属地信息库文件路径 ip2region.xdb
+#=================================================================
+xdb:
+  profile: xxx
